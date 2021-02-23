@@ -1,16 +1,36 @@
-/**************************************************************************//**
- * @main_series1_PG1_EFR.c
+/***************************************************************************//**
+ * @file main_s1_pg1_efr.c
  * @brief Demonstrates USART1 as SPI slave.
- * @version 0.0.1
- ******************************************************************************
- * @section License
- * <b>Copyright 2018 Silicon Labs, Inc. http://www.silabs.com</b>
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
 
 #include "em_device.h"
@@ -29,17 +49,32 @@ uint8_t TxBuffer[TX_BUFFER_SIZE] = {0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0x
 uint8_t TxBufferIndex = 1;
 
 /**************************************************************************//**
+ * @brief USART1 TX IRQ Handler
+ *****************************************************************************/
+void USART1_TX_IRQHandler(void)
+{
+  // Send and receive incoming data
+  USART1->TXDATA = (uint32_t)TxBuffer[TxBufferIndex];
+  TxBufferIndex++;
+
+  // Stop sending once we've gone through the whole TxBuffer
+  if (TxBufferIndex == TX_BUFFER_SIZE)
+  {
+    TxBufferIndex = 0;
+  }
+}
+
+/**************************************************************************//**
  * @brief USART1 RX IRQ Handler
  *****************************************************************************/
 void USART1_RX_IRQHandler(void)
 {
   if (USART1->STATUS & USART_STATUS_RXDATAV)
   {
-    // Read data
-    RxBuffer[RxBufferIndex++] = USART_Rx(USART1);
 
-    // Sending data, the USART_Tx function checks that the Tx buffer is clear before sending
-    USART_Tx(USART1, TxBuffer[TxBufferIndex++]);
+    // Read data
+    RxBuffer[RxBufferIndex] = USART_RxDataGet(USART1);
+    RxBufferIndex++;
 
     if (RxBufferIndex == RX_BUFFER_SIZE)
     {
@@ -48,11 +83,8 @@ void USART1_RX_IRQHandler(void)
       RxBufferIndex = 0;
     }
 
-    if(TxBufferIndex == TX_BUFFER_SIZE)
-    {
-      TxBufferIndex = 0;
-    }
   }
+
 }
 
 /**************************************************************************//**
@@ -76,7 +108,8 @@ void initUSART1 (void)
   config.msbf      = true;            // send MSB first
   config.enable    = usartDisable;    // making sure to keep USART disabled until we've set everything up
   USART_InitSync(USART1, &config);
-
+  USART0->CTRL |= USART_CTRL_SSSEARLY;
+  
   // Set USART pin locations
   USART1->ROUTELOC0 = (USART_ROUTELOC0_CLKLOC_LOC11) | // US1_CLK       on location 11 = PC8 per datasheet section 6.4 = EXP Header pin 8
 	              (USART_ROUTELOC0_CSLOC_LOC11)  | // US1_CS        on location 11 = PC9 per datasheet section 6.4 = EXP Header pin 10
@@ -86,15 +119,20 @@ void initUSART1 (void)
   // Enable USART pins
   USART1->ROUTEPEN = USART_ROUTEPEN_CLKPEN | USART_ROUTEPEN_CSPEN | USART_ROUTEPEN_TXPEN | USART_ROUTEPEN_RXPEN;
 
+  // Enabling TX interrupts to transfer whenever
+  // there is room in the transmit buffer
+  // This should immediately trigger to load the first byte of our TX buffer
+  USART_IntClear(USART1, USART_IF_TXBL);
+  USART_IntEnable(USART1, USART_IEN_TXBL);
+  NVIC_ClearPendingIRQ(USART1_TX_IRQn);
+  NVIC_EnableIRQ(USART1_TX_IRQn);
+  
   // Enable USART1 RX interrupts
   USART_IntClear(USART1, USART_IF_RXDATAV);
-  USART_IntEnable(USART1, USART_IF_RXDATAV);
+  USART_IntEnable(USART1, USART_IEN_RXDATAV);
   NVIC_ClearPendingIRQ(USART1_RX_IRQn);
   NVIC_EnableIRQ(USART1_RX_IRQn);
-
-  // Pre-loading our TXDATA register so our slave's echo can be in synch with the master
-  USART1->TXDATA = TxBuffer[0];
-
+  
   // Enable USART1
   USART_Enable(USART1, usartEnable);
 }

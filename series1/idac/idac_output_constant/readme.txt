@@ -1,5 +1,4 @@
-
-================================================================================
+idac_output_constant
 
 This example uses the IDAC to output 2 microamps to the pin specified in the pin
 mappings section below. The project operates in EM3. This example used about
@@ -90,10 +89,6 @@ PD12 - IDAC0_OUT (pin 11 of expansion headers)
 
 Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PA2  - IDAC0_OUT (pin 3 of expansion headers)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PA2  - IDAC0_OUT (pin 3 of expansion headers)
 
 Board:  Silicon Labs EFM32GG11 Starter Kit (SLSTK3701A)

@@ -1,7 +1,5 @@
 em4_wakeup
 
-For Tiny Gecko:
-
 This project demonstrates the ability for a pin to wake the device from EM4.
 When first loading th eproject, the device will enter EM4.
 Pressing the external reset button will wake the device from EM4 and cause the LEDs on the STK to
@@ -17,7 +15,7 @@ How to Test:
    exist from EM4
 
 Peripherals Used:
-HFRCO  - 19 MHz
+HFRCO  - 14 MHz
 
 Board: Silicon Labs EFM32TG Starter Kit (EFM32TG_STK3300)
 Device: EFM32TG840F32

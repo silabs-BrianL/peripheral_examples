@@ -1,9 +1,12 @@
-ACMP_Pin_Output
+acmp_pin_output
 
 This project demonstrates a simple comparison of 2 inputs. An external
 input pin is compared with an internal Vref of 1.25V.  When the voltage
 on the input pin is above 1.25V, an output pin will be set high. When it
 is low, the output pin will be set low.
+
+Note: Analog pin inputs cannot exceed the minimum of IOVDD or AVDD + 0.3V,
+regardless of whether OVT is enabled or disabled.
 
 How To Test:
 1. Build the project and download to the Starter Kit
@@ -78,12 +81,6 @@ Device: EFR32BG13P632F512GM48
 ACMP0 Input - PF6 (Push Button 0)
 ACMP0 Output- PF4 (LED 0 / ACMP Route Loc 28)
 
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A) + 
-        Wireless Starter Kit Mainboard
-Device: EFR32BG14P732F256GM48
-ACMP0 Input - PF6 (Push Button 0)
-ACMP0 Output- PF4 (LED 0 / ACMP Route Loc 28)
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A) + 
         Wireless Starter Kit Mainboard
 Device: EFR32FG1P133F256GM48
@@ -116,7 +113,7 @@ ACMP0 Output- PF4 (LED 0 / ACMP Route Loc 28)
 
 Board:  Silicon Labs EFR32MG12 Radio Board (SLWRB4161A) + 
         Wireless Starter Kit Mainboard
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 ACMP0 Input - PF6 (Push Button 0)
 ACMP0 Output- PF4 (LED 0 / ACMP Route Loc 28)
 

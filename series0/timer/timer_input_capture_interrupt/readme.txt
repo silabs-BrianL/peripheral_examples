@@ -1,5 +1,4 @@
-
-================================================================================
+timer_input_capture_interrupt
 
 This project demonstrates the use of the TIMER module for interrupt
 based input capture. After button 0 is pressed, the PRS routes this signal
@@ -102,7 +101,7 @@ Device: EFR32MG1P232F256GM48
 PF6 - Push Button 0
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PF6 - Push Button 0
 
 Board:  Silicon Labs EFR32MG13P Starter Kit (BRD4159A)

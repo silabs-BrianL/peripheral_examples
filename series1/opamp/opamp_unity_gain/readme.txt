@@ -1,5 +1,4 @@
-
-================================================================================
+opamp_unity_gain
 
 This project configures an opamp as a voltage follower with unity gain. The 
 output is routed back to the inverting input and the output voltage is equal to 
@@ -111,11 +110,6 @@ Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
 PC6 - OPA2_P   (APORT1XCH6) (Expansion Header Pin 4)
 PC7 - OPA2_OUT (APORT1YCH7) (Expansion Header Pin 6)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
-PC6 - OPA0_P   (APORT1XCH6) (Expansion Header Pin 4)
-PC7 - OPA0_OUT (APORT1YCH7) (Expansion Header Pin 6)
 
 Board:  Silicon Labs EFM32GG11 Starter Kit (SLSTK3701A)
 Device: EFM32GG11B820F2048GL192

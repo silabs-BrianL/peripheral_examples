@@ -1,17 +1,37 @@
 /***************************************************************************//**
- * @file
+ * @file main.c
  * @brief This example demonstrates the LDMA single descriptor looped transfer.
- *        See readme.txt for details.
- * @version 0.0.1
+ * See readme.txt for details.
  *******************************************************************************
- * @section License
- * <b>(C) Copyright 2019 Silicon Labs, http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
 
 #include "em_chip.h"
@@ -45,7 +65,7 @@ uint32_t dstBuffer[NUM_ITERATIONS][BUFFER_SIZE];
  * @brief
  *   LDMA IRQ handler.
  ******************************************************************************/
-void LDMA_IRQHandler( void )
+void LDMA_IRQHandler(void)
 {
   uint32_t pending;
 
@@ -56,7 +76,8 @@ void LDMA_IRQHandler( void )
   LDMA_IntClear(pending);
 
   // Check for LDMA error
-  if ( pending & LDMA_IF_ERROR ){
+  if (pending & LDMA_IF_ERROR)
+  {
     // Loop here to enable the debugger to see what has happened
     while (1);
   }
@@ -74,15 +95,17 @@ void initLdma(void)
   uint32_t i, j;
 
   // Initialize buffers for memory transfer
-  for (i = 0; i < BUFFER_SIZE; i++){
+  for (i = 0; i < BUFFER_SIZE; i++)
+  {
     srcBuffer[i] = i;
-    for (j = 0; j < NUM_ITERATIONS; j++){
+    for (j = 0; j < NUM_ITERATIONS; j++)
+    {
       dstBuffer[j][i] = 0;
     }
   }
 
   LDMA_Init_t init = LDMA_INIT_DEFAULT;
-  LDMA_Init( &init );
+  LDMA_Init(&init);
 
   // Use looped memory transfer configuration macro
   LDMA_TransferCfg_t periTransferTx = LDMA_TRANSFER_CFG_MEMORY_LOOP(LOOP_COUNT);

@@ -1,16 +1,36 @@
-/**************************************************************************//**
- * @main_series1_gg11.c
+/***************************************************************************//**
+ * @file main_s1_gg11.c
  * @brief Demonstrates USART0 as SPI master.
- * @version 0.0.1
- ******************************************************************************
- * @section License
- * <b>Copyright 2018 Silicon Labs, Inc. http://www.silabs.com</b>
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
 
 #include "em_device.h"
@@ -41,11 +61,8 @@ static LDMA_TransferCfg_t ldmaTXConfig;
 static LDMA_Descriptor_t ldmaRXDescriptor;
 static LDMA_TransferCfg_t ldmaRXConfig;
 
-#define letimerClkFreq  19000000
 // Desired letimer interrupt frequency (in Hz)
-#define letimerDesired  100000
-
-#define letimerCompare  letimerClkFreq / letimerDesired
+#define letimerDesired  1000
 
 /**************************************************************************//**
  * @brief LETIMER initialization
@@ -72,8 +89,11 @@ void initLETIMER(void)
   // Need REP0 != 0 to pulse on underflow
   LETIMER_RepeatSet(LETIMER0, 0, 10);
 
+  // calculate the topValue
+  uint32_t topValue = CMU_ClockFreqGet(cmuClock_LETIMER0) / letimerDesired;
+
   // Compare on wake-up interval count
-  LETIMER_CompareSet(LETIMER0, 0, letimerCompare);
+  LETIMER_CompareSet(LETIMER0, 0, topValue);
 
   // Initialize and enable LETIMER
   LETIMER_Init(LETIMER0, &letimerInit);

@@ -1,4 +1,4 @@
-VMON_Interrupt
+vmon_interrupt
 
 This project demonstrates the VMON to detect battery level threasholds
 in EM2.  When the source battery is below the THRESHOLD_VOLTAGE (3.0 V),
@@ -46,11 +46,6 @@ Device: EFR32BG13P632F512GM48
 HFRCO  - 19 MHz
 PF4 - LED0
 
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A)
-Device: EFR32BG14P732F256GM48
-HFRCO  - 19 MHz
-PF4 - LED0
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A)
 Device: EFR32FG1P133F256GM48
 HFRCO  - 19 MHz
@@ -77,7 +72,7 @@ HFRCO  - 19 MHz
 PF4 - LED0
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 HFRCO  - 19 MHz
 PF4 - LED0
 

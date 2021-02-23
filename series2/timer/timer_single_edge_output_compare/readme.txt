@@ -1,3 +1,5 @@
+timer_single_edge_output_compare
+
 This project demonstrates single output compare using the TIMER module.
 TIMER1 is initialized for output compare on Compare/Capture channel 0 which
 is routed to the GPIO pin specified below. The Compare value is set such that
@@ -22,4 +24,9 @@ Listed below are the port and pin mappings for working with this example.
 Board: Silicon Labs EFR32xG21 2.4 GHz 10 dBm Board (BRD4181A) 
        + Wireless Starter Kit Mainboard (BRD4001A)
 Device: EFR32MG21A010F1024IM32
+PA6 - TIM0_CC0 (Expansion Header Pin 14)
+
+Board:  Silicon Labs EFR32xG22 Radio Board (BRD4182A) + 
+        Wireless Starter Kit Mainboard
+Device: EFR32MG22C224F512IM40
 PA6 - TIM0_CC0 (Expansion Header Pin 14)

@@ -1,7 +1,5 @@
 em4_wakeup
 
-For Happy Gecko:
-
 This project demonstrates the ability for a pin to wake the device from EM4.
 Under a normal, non-EM4 reset, the device will enter EM4.
 Pressing PB0 will wake the device from EM4 and cause the LEDs on the STK to
@@ -16,7 +14,7 @@ How To Test:
     exit from EM4.
 
 Peripherals Used:
-HFRCO  - 19 MHz
+HFRCO  - 14 MHz
 
 Board:  Silicon Labs EFM32HG Starter Kit (SLSTK3400A)
 Device: EFM32HG322F64

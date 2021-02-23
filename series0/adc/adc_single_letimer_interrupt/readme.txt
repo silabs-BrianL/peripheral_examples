@@ -1,4 +1,4 @@
-ADC_Single_Letimer_Interrupt
+adc_single_letimer_interrupt
 
 This project demonstrates ADC0 peripheral used with a single-ended input 
 to take nonblocking measurements requested periodically by the LETIMER.
@@ -97,7 +97,7 @@ PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 10)
 
 Board:  Silicon Labs EFR32MG12 Radio Board (SLWRB4161A) + 
         Wireless Starter Kit Mainboard
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 13)
 
 Board:  Silicon Labs EFR32MG13 Radio Board (SLWRB4159A) + 

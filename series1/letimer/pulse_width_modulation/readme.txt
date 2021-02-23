@@ -1,4 +1,4 @@
-LETIMER_Pulse_Width_Modulation
+letimer_pulse_width_modulation
 
 This project demonstrates pulse width modulation using the LETIMER.
 The project initializes the timer for PWM with a set 30 percent 
@@ -51,10 +51,6 @@ PF4 (LED0) - Input TIM0_CC0 #28
 
 Board:  Silicon Labs EFR32BG13 Radio Board (SLWRB4104A)
 Device: EFR32BG13P632F512GM48
-PF4 (LED0) - Input TIM0_CC0 #28
-
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A) 
-Device: EFR32BG14P732F256GM48
 PF4 (LED0) - Input TIM0_CC0 #28
 
 Board:  Silicon Labs EFM32FG1P Starter Kit (BRD4250A)

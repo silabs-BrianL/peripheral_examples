@@ -1,4 +1,4 @@
-WDOG
+wdog_led_toggle
 
 This project demonstrates the functionality of the watchdog timer. It uses 
 LEDs and a Push-button to indicate the state of the system. If the LEDs are 
@@ -78,13 +78,6 @@ PF7 - Push Button PB1
 
 Board: Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PF4 - LED0
-PF5 - LED1
-PF6 - Push Button PB0
-PF7 - Push Button PB1
-
-Board: Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PF4 - LED0
 PF5 - LED1
 PF6 - Push Button PB0

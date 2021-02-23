@@ -1,4 +1,4 @@
-ADC_Single_Letimer_Prs_Dma
+adc_single_letimer_prs_dma
 
 This project demonstrates ADC0 peripheral in EM2 to take single-ended
 measurements.  These measurements are requested periodically by the 
@@ -91,7 +91,7 @@ PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 10)
 
 Board:  Silicon Labs EFR32MG12 Radio Board (SLWRB4161A) + 
         Wireless Starter Kit Mainboard
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 13)
 
 Board:  Silicon Labs EFR32MG13 Radio Board (SLWRB4159A) + 

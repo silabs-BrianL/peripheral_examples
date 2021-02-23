@@ -1,14 +1,14 @@
-PCNT_SINGLE_OVERSAMPLING
+pcnt_single_oversampling_underflow
 
- This project demonstrates the single input oversampling mode of the pulse counter
- with interrupts. LFA clock is used as the pulse counter clock in this example. The
- program generates an interrupt whenever the pulse counter goes below zero.
- In this example, each press of Push Button PB0 will decrease the counter value by 1.
- The initial value of the counter and the reload value from the top register is set
- by the user.
+This project demonstrates the single input oversampling mode of the pulse counter
+with interrupts. LFA clock is used as the pulse counter clock in this example. The
+program generates an interrupt whenever the pulse counter goes below zero.
+In this example, each press of Push Button PB0 will decrease the counter value by 1.
+The initial value of the counter and the reload value from the top register is set
+by the user.
 
- When testing, observe how the value of the counter register is counting down whenever
- BTN0 is pressed.
+When testing, observe how the value of the counter register is counting down whenever
+BTN0 is pressed.
 
 How To Test:
 1. Build the project and download to the Starter Kit
@@ -77,11 +77,6 @@ PF6 - Push Button PB0
 
 Board:  Silicon Labs EFM32BG13P Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PF4 - LED0
-PF6 - Push Button PB0
-
-Board:  Silicon Labs EFM32BG14P Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PF4 - LED0
 PF6 - Push Button PB0
 

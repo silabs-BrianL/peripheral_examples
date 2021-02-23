@@ -1,4 +1,4 @@
-ADC_Single_Polled
+adc_single_polled
 
 This project demonstrates using the ADC0 peripheral to take single-ended
 analog measurements.  The main program polls continuously for conversions,
@@ -72,11 +72,6 @@ Board:  Silicon Labs EFR32BG13 Radio Board (SLWRB4104A) +
 Device: EFR32BG13P632F512GM48
 PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 10)
 
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A) + 
-        Wireless Starter Kit Mainboard
-Device: EFR32BG14P732F256GM48
-PA3 - ADC0 Port 4X Channel 11 (Expansion Header Pin 5)
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A) + 
         Wireless Starter Kit Mainboard
 Device: EFR32FG1P133F256GM48
@@ -104,7 +99,7 @@ PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 10)
 
 Board:  Silicon Labs EFR32MG12 Radio Board (SLWRB4161A) + 
         Wireless Starter Kit Mainboard
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 13)
 
 Board:  Silicon Labs EFR32MG13 Radio Board (SLWRB4159A) + 

@@ -1,5 +1,4 @@
-
-================================================================================
+vdac_sine_wave_synch
 
 This project uses the DAC and the internal sine wave generator to produce a
 16-point sine wave at a frequency of f_sinewave Hz centered at the reference
@@ -110,10 +109,6 @@ PA3 - VDAC0_OUT0 (Pin 36 of breakout pads)
 
 Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PA3 - VDAC0_OUT0 (Pin 2 of breakout pads)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PA3 - VDAC0_OUT0 (Pin 2 of breakout pads)
 
 Board:  Silicon Labs EFR32FG12 Radio Board (BRD4253A)

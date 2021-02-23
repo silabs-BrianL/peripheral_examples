@@ -1,20 +1,41 @@
 /***************************************************************************//**
- * @file
+ * @file main.c
  * @brief This example demonstrates the single direct register LDMA transfer.
- *        See readme.txt for details.
- * @version 0.0.1
+ * See readme.txt for details.
  *******************************************************************************
- * @section License
- * <b>(C) Copyright 2019 Silicon Labs, http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
 
 #include "em_chip.h"
+#include "em_cmu.h"
 #include "em_device.h"
 #include "em_emu.h"
 #include "em_gpio.h"
@@ -28,19 +49,21 @@
 
 // Memory to memory transfer buffer size and constants for GPIO PRS
 #define BUFFER_SIZE         128
-#define TRANSFER_SIZE       BUFFER_SIZE - 1
-#define USE_GPIO_PRS        1    
+#define TRANSFER_SIZE       BUFFER_SIZE
+#define USE_GPIO_PRS        0
 #define GPIO_PRS_CHANNEL    1
 
 // Buffers for memory to memory transfer
 uint16_t srcBuffer[BUFFER_SIZE];
 uint16_t dstBuffer[BUFFER_SIZE];
 
+LDMA_Descriptor_t des;
+
 /***************************************************************************//**
  * @brief
  *   LDMA IRQ handler.
  ******************************************************************************/
-void LDMA_IRQHandler( void )
+void LDMA_IRQHandler(void)
 {
   uint32_t pending;
 
@@ -51,7 +74,8 @@ void LDMA_IRQHandler( void )
   LDMA_IntClear(pending);
 
   // Check for LDMA error
-  if ( pending & LDMA_IF_ERROR ){
+  if (pending & LDMA_IF_ERROR)
+  {
     // Loop here to enable the debugger to see what has happened
     while (1);
   }
@@ -64,6 +88,10 @@ void LDMA_IRQHandler( void )
  ******************************************************************************/
 static void gpioPrsSetup(void)
 {
+  // Enable peripheral clocks
+  CMU_ClockEnable(cmuClock_GPIO, true);
+  CMU_ClockEnable(cmuClock_PRS, true);
+
   // Configure push button PB1 as input
   GPIO_PinModeSet(BSP_GPIO_PB1_PORT, BSP_GPIO_PB1_PIN,
                   gpioModeInputPullFilter, 1);
@@ -73,7 +101,7 @@ static void gpioPrsSetup(void)
 
   // Select GPIO as PRS source and push button PB1 as signal for PRS channel
   PRS_SourceAsyncSignalSet(GPIO_PRS_CHANNEL, PRS_ASYNC_CH_CTRL_SOURCESEL_GPIO,
-                           PRS_ASYNC_CH_CTRL_SIGSEL_GPIOPIN3);
+                           BSP_GPIO_PB1_PIN);
 
   // DMA request is high active, invert PRS signal to default low
   PRS_Combine(GPIO_PRS_CHANNEL, GPIO_PRS_CHANNEL, prsLogic_NOT_A);
@@ -85,48 +113,49 @@ static void gpioPrsSetup(void)
 
 /***************************************************************************//**
  * @brief
- *   Initialize the LDMA controller for single direct register transfer
+ *   Setup LDMA to be triggered either by software or by pressing PB1
  ******************************************************************************/
 void initLdma(void)
 {
   uint32_t i;
 
+  // Enable peripheral clock
+  CMU_ClockEnable(cmuClock_LDMA, true);
+
   // Initialize buffers for memory transfer
-  for (i = 0; i < BUFFER_SIZE; i++){
+  for (i = 0; i < BUFFER_SIZE; i++)
+  {
     srcBuffer[i] = i;
     dstBuffer[i] = 0;
   }
 
+  // Initialize LDMA with default settings
   LDMA_Init_t init = LDMA_INIT_DEFAULT;
-  LDMA_Init( &init );
-  
-  // Writes directly to the LDMA channel registers
-  LDMA->CH[LDMA_CHANNEL].CTRL =
-      LDMA_CH_CTRL_SIZE_HALFWORD
-      | LDMA_CH_CTRL_REQMODE_ALL
-      | LDMA_CH_CTRL_BLOCKSIZE_UNIT4
-      | (TRANSFER_SIZE) << _LDMA_CH_CTRL_XFERCNT_SHIFT;
-  LDMA->CH[LDMA_CHANNEL].SRC = (uint32_t)&srcBuffer;
-  LDMA->CH[LDMA_CHANNEL].DST = (uint32_t)&dstBuffer;
+  LDMA_Init(&init);
 
-#if (USE_GPIO_PRS == 1)
-  // Wait PRS on DMAREQ0 to start transfer
-  LDMAXBAR->CH[LDMA_CHANNEL].REQSEL = LDMAXBAR_CH_REQSEL_SIGSEL_LDMAXBARPRSREQ0
-    | LDMAXBAR_CH_REQSEL_SOURCESEL_LDMAXBAR;
+  #if (USE_GPIO_PRS==1)
+  // Use peripheral transfer configuration macro for DMA channels
+  LDMA_TransferCfg_t periTransferPB1 =
+    LDMA_TRANSFER_CFG_PERIPHERAL(LDMAXBAR_CH_REQSEL_SIGSEL_LDMAXBARPRSREQ0
+                                 | LDMAXBAR_CH_REQSEL_SOURCESEL_LDMAXBAR);
 #else
-  // Software to start transfer
-  LDMAXBAR->CH[LDMA_CHANNEL].REQSEL = ldmaPeripheralSignal_NONE;
+  LDMA_TransferCfg_t periTransferPB1 =
+    LDMA_TRANSFER_CFG_MEMORY();
 #endif
 
-  // Enable interrupt 
-  LDMA->IF_CLR = LDMA_CH_MASK;
-  LDMA->IEN = LDMA_CH_MASK;
+  // Set up descriptor links
+  des = (LDMA_Descriptor_t)
+    LDMA_DESCRIPTOR_SINGLE_M2M_WORD(&srcBuffer, &dstBuffer, TRANSFER_SIZE);
 
-  // Enable LDMA Channel
-  LDMA->CHEN = LDMA_CH_MASK;
+  // Transfer half word size
+  des.xfer.size = ldmaCtrlSizeHalf;
+  des.xfer.reqMode = ldmaCtrlReqModeAll;
+  des.xfer.structReq = false;
 
-#if (USE_GPIO_PRS == 0)
-  // Request transfer
+  // Start both channels
+  LDMA_StartTransfer(LDMA_CHANNEL, (void*)&periTransferPB1, (void*)&des);
+
+#if (USE_GPIO_PRS==0)
   LDMA->SWREQ |= LDMA_CH_MASK;
 #endif
 }

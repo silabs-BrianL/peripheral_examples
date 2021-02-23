@@ -1,5 +1,4 @@
-
-================================================================================
+opamp_differential_two
 
 This project operates in EM3 and configures opamp 0 as a voltage follower and
 opamp 1 as a non-inverting opamp. The equation for Vdiff is shown below:
@@ -128,12 +127,6 @@ PD9  - OPA1_OUT (APORT3YCH1) (Expansion Header Pin 5)
 
 Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PC6 - OPA0_P   (APORT1XCH6) (Expansion Header Pin 4)
-PC7 - OPA1_P   (APORT2XCH7) (Expansion Header Pin 6)
-PC8 - OPA1_OUT (APORT2YCH8) (Expansion Header Pin 8)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PC6 - OPA0_P   (APORT1XCH6) (Expansion Header Pin 4)
 PC7 - OPA1_P   (APORT2XCH7) (Expansion Header Pin 6)
 PC8 - OPA1_OUT (APORT2YCH8) (Expansion Header Pin 8)

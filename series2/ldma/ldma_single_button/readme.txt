@@ -1,4 +1,4 @@
-LDMA_Single_Button
+ldma_single_button
 
 This example is based on the EFR32 Series 2 Reference Manual:
 Chapter: LDMA
@@ -34,3 +34,8 @@ Board:  Silicon Labs EFR32xG21 2.4 GHz 10 dBm Radio Board (BRD4181A) +
         Wireless Starter Kit Mainboard (BRD4001A)
 Device: EFM32MG21A010F1024IM32
 PD03 - Push Button PB1
+
+Board:  Silicon Labs EFR32xG22 Radio Board (BRD4182A) + 
+        Wireless Starter Kit Mainboard
+Device: EFR32MG22C224F512IM40
+PB01  - push button PB1

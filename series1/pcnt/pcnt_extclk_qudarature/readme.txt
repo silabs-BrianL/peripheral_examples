@@ -1,8 +1,8 @@
 pcnt_extclk_quadrature
 
- This project demonstrates the external quadrature mode of the pulse counter
- peripheral. The program will request an interrupt whenever the quadrature
- decoder detects a change in direction.
+This project demonstrates the external quadrature mode of the pulse counter
+peripheral. The program will request an interrupt whenever the quadrature
+decoder detects a change in direction.
 
 
 How To Test:
@@ -91,13 +91,6 @@ PF7 - Push Button PB1
 
 Board:  Silicon Labs EFM32BG13P Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PF4 - LED0
-PF5 - LED1
-PF6 - Push Button PB0
-PF7 - Push Button PB1
-
-Board:  Silicon Labs EFM32BG14P Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PF4 - LED0
 PF5 - LED1
 PF6 - Push Button PB0

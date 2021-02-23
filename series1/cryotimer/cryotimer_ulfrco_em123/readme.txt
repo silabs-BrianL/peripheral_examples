@@ -1,5 +1,4 @@
-
-================================================================================
+cryotimer_ulfrco_em123
 
 This project shows how to use the Cryotimer with the ULFRCO in EM3. The project
 idles in EM3 while waiting for the interrupt handler to toggle LED0. An
@@ -53,10 +52,6 @@ Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
 PF4 - LED0
 
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
-PF4 - LED0
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A)
 Device: EFR32FG1P133F256GM48
 PF4 - LED0
@@ -78,7 +73,7 @@ Device: EFR32MG1P232F256GM48
 PF4 - LED0
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PF4 - LED0
 
 Board:  Silicon Labs EFR32MG13P Starter Kit (BRD4159A)

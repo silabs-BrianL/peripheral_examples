@@ -1,17 +1,36 @@
-/**************************************************************************//**
- * @file
+/***************************************************************************//**
+ * @file main_s1.c
  * @brief Use the ADC to take periodic scan measurements in EM2
- * @version 0.0.1
- ******************************************************************************
- * @section License
- * <b>(C) Copyright 2018 Silicon Labs, http://www.silabs.com</b>
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silicon Labs Software License Agreement. See
- * "http://developer.silabs.com/legal/version/v11/Silicon_Labs_Software_License_Agreement.txt"
- * for details. Before using this software for any purpose, you must agree to the
- * terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
 
 #include <stdio.h>
@@ -30,14 +49,11 @@
 // Change this to set how many samples get sent at once
 #define ADC_DVL         2
 
-// Init to max ADC clock for Series 1
-#define ADC_FREQ        16000000
-#define letimerClkFreq  19000000
+// Init to max ADC clock for Series 1 with AUXHFRCO
+#define ADC_FREQ        4000000
 
 // Desired letimer interrupt frequency (in Hz)
 #define letimerDesired  1000
-
-#define letimerCompare  letimerClkFreq / letimerDesired
 
 #define LDMA_CHANNEL    0
 #define PRS_CHANNEL     0
@@ -87,8 +103,11 @@ void initLetimer(void)
   // Need REP0 != 0 to pulse on underflow
   LETIMER_RepeatSet(LETIMER0, 0, 1);
 
+  // calculate the topValue
+  uint32_t topValue = CMU_ClockFreqGet(cmuClock_LETIMER0) / letimerDesired;
+
   // Compare on wake-up interval count
-  LETIMER_CompareSet(LETIMER0, 0, letimerCompare);
+  LETIMER_CompareSet(LETIMER0, 0, topValue);
 
   // Use LETIMER0 as async PRS to trigger ADC in EM2
   CMU_ClockEnable(cmuClock_PRS, true);
@@ -113,7 +132,7 @@ void initLdma(void)
   // Transfer triggers on ADC Scan conversion complete
   trans = (LDMA_TransferCfg_t)LDMA_TRANSFER_CFG_PERIPHERAL(ldmaPeripheralSignal_ADC0_SCAN);
 
-  descr = (LDMA_Descriptor_t)LDMA_DESCRIPTOR_LINKREL_P2M_BYTE(
+  descr = (LDMA_Descriptor_t)LDMA_DESCRIPTOR_LINKREL_P2M_WORD(
       &(ADC0->SCANDATA),  // source
       adcBuffer,          // destination
       ADC_BUFFER_SIZE,    // data transfer size
@@ -121,7 +140,6 @@ void initLdma(void)
 
   descr.xfer.blockSize =ADC_DVL-1;    // transfers ADC_DVL number of units per arbitration cycle
   descr.xfer.ignoreSrec = true; // ignores single requests to reduce energy usage
-  descr.xfer.size = ldmaCtrlSizeWord; // transfers words instead of bytes
 
   // Initialize LDMA transfer
   LDMA_StartTransfer(LDMA_CHANNEL, &trans, &descr);
@@ -156,9 +174,9 @@ void initAdc(void)
   init.em2ClockConfig = adcEm2ClockOnDemand;
 
   // Add external ADC input to scan. See README for corresponding EXP header pin.
-  // Add VDD to scan for demonstration purposes
+  // *Note that internal channels are unavailable in ADC scan mode
   ADC_ScanSingleEndedInputAdd(&initScan, adcScanInputGroup0, adcPosSelAPORT2XCH9);
-  ADC_ScanSingleEndedInputAdd(&initScan, adcScanInputGroup1, adcPosSelAVDD);
+  ADC_ScanSingleEndedInputAdd(&initScan, adcScanInputGroup1, adcPosSelAPORT2YCH10);
 
   // Basic ADC scan configuration
   initScan.diff       = false;        // single-ended

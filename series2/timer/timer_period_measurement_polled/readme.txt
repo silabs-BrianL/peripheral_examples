@@ -1,3 +1,4 @@
+timer_period_measurement_polled
 
 This project demonstrates polled period measurement using the TIMER module. 
 TIMER is initialized for input capture on Compare/Capture channel 0 for falling 
@@ -34,4 +35,9 @@ Listed below are the port and pin mappings for working with this example.
 Board: Silicon Labs EFR32xG21 2.4 GHz 10 dBm Board (BRD4181A) 
        + Wireless Starter Kit Mainboard (BRD4001A)
 Device: EFR32MG21A010F1024IM32
+PA6 - TIM0_CC0 (Expansion Header Pin 14)
+
+Board:  Silicon Labs EFR32xG22 Radio Board (BRD4182A) + 
+        Wireless Starter Kit Mainboard
+Device: EFR32MG22C224F512IM40
 PA6 - TIM0_CC0 (Expansion Header Pin 14)

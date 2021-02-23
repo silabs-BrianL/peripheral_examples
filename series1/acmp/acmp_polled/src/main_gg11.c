@@ -1,17 +1,43 @@
-/**************************************************************************//**
- * @file
- * @brief This project demonstrates a simple analog comparison of PB9
- * to the 1.25V internal VREF; when the voltage is below 1.25, LED0 is red.
- ******************************************************************************
- * @section License
- * <b>Copyright 2018 Silicon Labs, Inc. http://www.silabs.com</b>
+/***************************************************************************//**
+ * @file main_gg11.c
+ * @brief This project demonstrates a simple analog comparison of PB9 to the
+ * 1.25V internal VREF; when the voltage is below 1.25, LED0 is red.
+ *
+ * Note: Analog pin inputs cannot exceed the minimum of IOVDD or AVDD + 0.3V,
+ * regardless of whether OVT is enabled or disabled.
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ * Note: The voltage on the input pin may not exceed IOVDD + 0.3V
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
+
 #include "em_device.h"
 #include "em_chip.h"
 #include "em_cmu.h"
@@ -23,14 +49,24 @@
 /**************************************************************************//**
  * @brief GPIO initialization
  *****************************************************************************/
-void initGpio(void)
+void initGPIO(void)
 {
   // Enable clock
   CMU_ClockEnable(cmuClock_GPIO, true);
 
   // Configure input: PB9 (Expansion Header Pin 13)
-  GPIO_PinModeSet(gpioPortB, 9, gpioModeInputPull, 0);
+  // It is recommended to set the pin mode to disabled for analog inputs.
+  // See the GPIO description in the device reference manual for more details.
+  GPIO_PinModeSet(gpioPortB, 9, gpioModeDisabled, 0);
+
+  // Configure LED0 pin
   GPIO_PinModeSet(BSP_GPIO_LED0_PORT, BSP_GPIO_LED0_PIN, gpioModePushPull, 0);
+
+  // Disable OVT for pins used as analog inputs. Disabling the over-voltage
+  // capability will provide less distortion on analog inputs.
+  // Analog pin inputs cannot exceed the minimum of IOVDD or AVDD + 0.3V,
+  // regardless of whether OVT is enabled or disabled.
+  GPIO->P[gpioPortB].OVTDIS |= 1 << 9;
 }
 
 /**************************************************************************//**
@@ -73,7 +109,7 @@ int main(void)
   CHIP_Init();
 
   // Initializations
-  initGpio();
+  initGPIO();
   initACMP();
 
   while(1){

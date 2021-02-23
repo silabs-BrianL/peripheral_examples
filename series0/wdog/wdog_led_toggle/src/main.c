@@ -1,21 +1,42 @@
-/**************************************************************************//**
- * @file
- * @brief This project demonstrates the functionality of the watchdog
- * timer. It uses LEDs and a Push-button to indicate the state of
- * the system. If the LEDs are flashing, the system has not undergone
- * a reset. If the Push Button 0 is pressed and held for some time, it
- * will trigger a WDOG reset. See readme.txt for details.
- * @version 0.0.1
- ******************************************************************************
- * @section License
- * <b>Copyright 2018 Silicon Labs, Inc. http://www.silabs.com</b>
+/***************************************************************************//**
+ * @file main.c
+ * @brief This project demonstrates the functionality of the watchdog timer. It
+ * uses an LED and a Push-button to indicate the state of the system. If the LED
+ * is flashing, the system has not undergone a reset. If the Push Button 0 is
+ * pressed and held for some time, it will trigger a WDOG reset. See readme.txt
+ * for details.
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
+
 #include "em_gpio.h"
 #include "em_device.h"
 #include "em_wdog.h"
@@ -75,7 +96,7 @@ int main(void)
   // Clear Reset causes so we know which reset occurs the next time 
   RMU_ResetCauseClear();
 
-  // Configure the Push Buttons and the LEDs 
+  // Configure the Push Buttons and the LED
   initGPIO();
 
   // Setup SysTick Timer for 1 msec interrupts  
@@ -87,7 +108,7 @@ int main(void)
   // Check if Power on Reset (POR) triggered the last reset 
   if (resetCause & RMU_RSTCAUSE_WDOGRST)
   {
-    // Turn LED0 and LED1 ON 
+    // Turn LED0 ON
     GPIO_PinOutSet(BSP_GPIO_LED0_PORT, BSP_GPIO_LED0_PIN);
     while(1); //Stay here
   }
@@ -105,7 +126,7 @@ int main(void)
   // Feed the watchdog 
 	WDOG_Feed();
 
-	// Toggle LED0 and LED1 at 10 kHz 
+	// Toggle LED0 at 10 kHz
 	GPIO_PinOutToggle(BSP_GPIO_LED0_PORT, BSP_GPIO_LED0_PIN);
 	Delay(100);
   }
@@ -119,7 +140,7 @@ void initGPIO(void)
   // Enable clock for the GPIO module 
   CMU_ClockEnable(cmuClock_GPIO, true);
 
-  // Configure the GPIO pins F4 and F5 for the LEDs as output pins 
+  // Configure the GPIO pin for LED0 as output pin
   GPIO_PinModeSet(BSP_GPIO_LED0_PORT, BSP_GPIO_LED0_PIN, gpioModePushPull, 0);
 
   // Configure PB0 as input  

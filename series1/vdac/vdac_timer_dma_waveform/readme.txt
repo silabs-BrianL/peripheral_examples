@@ -1,5 +1,4 @@
-
-================================================================================
+vdac_timer_dma_waveform
 
 This project uses the DAC/VDAC and TIMER0 to output a 32 point sine wave at a
 particular frequency (10 kHz by default). This project operates in EM1 because
@@ -85,10 +84,6 @@ PA3 - VDAC0_OUT0 (Pin 36 of breakout pads)
 
 Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PA3 - VDAC0_OUT0 (Pin 2 of breakout pads)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PA3 - VDAC0_OUT0 (Pin 2 of breakout pads)
 
 Board:  Silicon Labs EFR32FG12 Radio Board (BRD4253A)

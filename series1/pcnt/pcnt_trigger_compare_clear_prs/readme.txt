@@ -1,11 +1,11 @@
-PCNT_TRIGGER_COMPARE_CLEAR_PRS
+pcnt_trigger_compare_clear_prs
 
- This project demonstrates the trigger compare and clear functionality
- of the pulse counter using interrupts. The program requests an interrupt 
- whenever the pulse counter clock (PRS in this example) triggers a
- compare and clear command and the result is the counter less than 
- or equal to the top value. Note the top value is set to 5 in this
- example. This feature is only for series 1 boards.
+This project demonstrates the trigger compare and clear functionality
+of the pulse counter using interrupts. The program requests an interrupt 
+whenever the pulse counter clock (PRS in this example) triggers a
+compare and clear command and the result is the counter less than 
+or equal to the top value. Note the top value is set to 5 in this
+example. This feature is only for series 1 boards.
 
 
 How To Test:
@@ -48,12 +48,6 @@ PF7 - Push Button PB1
 
 Board:  Silicon Labs EFM32BG13P Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PF4 - LED0
-PF6 - Push Button PB0
-PF7 - Push Button PB1
-
-Board:  Silicon Labs EFM32BG14P Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PF4 - LED0
 PF6 - Push Button PB0
 PF7 - Push Button PB1

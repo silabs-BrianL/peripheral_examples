@@ -1,4 +1,4 @@
-VMON_EM4_Wakeup
+vmon_em4_wakeup
 
 This project demonstrates using the VMON to wakeup from EM4H whenever 
 the battery level drops below a certain threashold. When first loaded,
@@ -48,11 +48,6 @@ Device: EFR32BG13P632F512GM48
 HFRCO  - 19 MHz
 PF4 - LED0
 
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A)
-Device: EFR32BG14P732F256GM48
-HFRCO  - 19 MHz
-PF4 - LED0
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A)
 Device: EFR32FG1P133F256GM48
 HFRCO  - 19 MHz
@@ -79,7 +74,7 @@ HFRCO  - 19 MHz
 PF4 - LED0
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 HFRCO  - 19 MHz
 PF4 - LED0
 

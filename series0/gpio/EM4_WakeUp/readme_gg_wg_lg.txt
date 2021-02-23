@@ -1,7 +1,5 @@
 em4_wakeup
 
-For Giant Gecko 1, Wonder Gecko, and Leopard Gecko:
-
 This project demonstrates the ability for a pin to wake the device from EM4.
 Under a normal, non-EM4 reset, the device will enter EM4.
 Grounding PA0 will wake the device from EM4 and cause the output pin to toggle indefinitely.
@@ -17,7 +15,7 @@ How To Test:
     exit from EM4.
 
 Peripherals Used:
-HFRCO  - 19 MHz
+HFRCO  - 14 MHz
 
 Board:  Silicon Labs EFM32GG Starter Kit (STK3700)
 Device: EFM32GG990F1024

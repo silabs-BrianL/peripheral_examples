@@ -1,5 +1,4 @@
-
-================================================================================
+usbd_cdc_uart_bridge
 
 This project uses the USB module to implement a USB CDC device (Communications
 Device Class) that uses the driver code in Drivers/cdc.c to act as a USB to UART
@@ -8,10 +7,6 @@ and then sent over USB to the USB host. Input that is received from the USB host
 is then processed and sent to the USB device's USART TX pin. In this case, the
 USB host is the computer and the USB device is the EFM32 board. This project
 operates in EM1.
-
-Note: the Drivers/cdc.c file uses the DMA and therefore is not compatible with
-the GG11's LDMA. Therefore, this repo has a src/cdc_gg11.c file that is simply a
-port of the Drivers/cdc.c file to use the LDMA instead.
 
 The src/descriptors.c file defines what kind of device is seen by the USB host.
 It defines the device as a CDC device, the vendor ID, product ID, etc.
@@ -69,22 +64,17 @@ usbd_cdc_uart_bridge/
 
   - inc
 
-      inc_gg11/
-        usbconfig.h
-
       inc_hg/
         usbconfig.h
 
       inc_series0/
-        usbconfig.h
+      usbconfig.h
 
       cdc.h
       descriptors.h
 
   - src
-      cdc_gg11.c
       descriptors.c
-      main_gg11.c
       main_s0.c
 
 There are two main folders: inc/ and src/. The inc/ folder has all of the
@@ -92,8 +82,7 @@ releveant header files. Every project shares the cdc.h and descriptors.h file
 since they don't have much other than function prototypes and a list of global
 variables. Each project has its own usbconfig.h file because of different pin
 mappings for the USART, DMA/LDMA, etc. Series 0 projects (i.e. GG, LG, WG, HG)
-have two source files: main_s0.c and descriptors.c. The GG11 project has three
-source files: main_s1.c, descriptors.c, and cdc_gg11.c.
+have two source files: main_s0.c and descriptors.c. 
 
 ================================================================================
 

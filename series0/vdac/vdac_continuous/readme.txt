@@ -1,5 +1,4 @@
-
-================================================================================
+vdac_continuous
 
 This project uses the VDAC in continuous mode with single-ended output to output
 0.5V to a pin in EM3. The VDAC operates independently from the core. Since the
@@ -54,7 +53,7 @@ Board:  Silicon Labs EFM32LG Starter Kit (STK3600)
 Device: EFM32LG990F256
 PB11 - VDAC0_OUT0 (Pin 11 of expansion headers)
 
-Board:  Silicon Labs EFM32WG Starter Kit (STK3800)
+Board:  Silicon Labs EFM32WG Starter Kit (STK3300)
 Device: EFM32WG990F256
 PB11 - VDAC0_OUT0 (Pin 11 of expansion headers)
 

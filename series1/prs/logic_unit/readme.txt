@@ -1,4 +1,4 @@
-PRS_Logic
+prs_logic_unit
 
 This project demonstrates the built-in PRS logic functions between channels.
 PB0 and PB1 are routed to output pins (usually LEDs, but not always.  We'll 
@@ -59,11 +59,6 @@ OUT1 - PRS Channel 1 Route 4  - PF5 (LED1)
 
 Board:  Silicon Labs EFR32BG13 Radio Board (SLWRB4104A)
 Device: EFR32BG13P632F512GM48
-OUT0 - PRS Channel 0 Route 4  - PF4 (LED0)
-OUT1 - PRS Channel 1 Route 4  - PF5 (LED1)
-
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A) 
-Device: EFR32BG14P732F256GM48
 OUT0 - PRS Channel 0 Route 4  - PF4 (LED0)
 OUT1 - PRS Channel 1 Route 4  - PF5 (LED1)
 

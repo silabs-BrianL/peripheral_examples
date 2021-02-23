@@ -1,5 +1,4 @@
-
-================================================================================
+wtimer_dma_edge_capture
 
 This project demonstrates edge capture with DMA. The first 512 events
 captured by WTIMER CC0 are transferred to a fixed length buffer by the
@@ -46,10 +45,6 @@ Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
 PC10 - WTIM0_CC0 #30 (Expansion Header Pin 15)
 
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
-PC10 - WTIM0_CC0 #30 (Expansion Header Pin 15)
-
 Board:  Silicon Labs EFR32FG12P Starter Kit (BRD4253A)
 Device: EFR32FG12P433F1024GL125
 PC10 - WTIM0_CC0 #30 (Expansion Header Pin 15)
@@ -63,7 +58,7 @@ Device: EFR32FG14P233F256GM48
 PC10 - WTIM0_CC0 #30 (Expansion Header Pin 15)
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PC10 - WTIM0_CC0 #30 (Expansion Header Pin 15)
 
 Board:  Silicon Labs EFR32MG13P Starter Kit (BRD4159A)

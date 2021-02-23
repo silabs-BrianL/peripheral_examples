@@ -1,18 +1,43 @@
-/**************************************************************************//**
- * @file
- * @brief This project demonstrates a simple analog comparison of 2 pins,
- * it compares the voltage at PC0 to the 1.25V internal VREF, if the voltage
- * is high, it sets an output pin PD6 to logic high
- ******************************************************************************
- * @section License
- * <b>Copyright 2018 Silicon Labs, Inc. http://www.silabs.com</b>
+/***************************************************************************//**
+ * @file main_tg11.c
+ * @brief This project demonstrates a simple analog comparison of 2 pins, it
+ * compares the voltage at PC0 to the 1.25V internal VREF, if the voltage is
+ * high, it sets an output pin PD6 to logic high
+ *
+ * Note: Analog pin inputs cannot exceed the minimum of IOVDD or AVDD + 0.3V,
+ * regardless of whether OVT is enabled or disabled.
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
+
 #include "em_device.h"
 #include "em_chip.h"
 #include "em_cmu.h"
@@ -28,11 +53,19 @@ void initGPIO(void)
   // Enable clock
   CMU_ClockEnable(cmuClock_GPIO, true);
 
-  // Configure PC0 as input(Exp Header Pin 3)
-  GPIO_PinModeSet(gpioPortC, 0, gpioModeInputPull, 0);
+  // Configure input: PC0 (Expansion Header Pin 3)
+  // It is recommended to set the pin mode to disabled for analog inputs.
+  // See the GPIO description in the device reference manual for more details.
+  GPIO_PinModeSet(gpioPortC, 0, gpioModeDisabled, 0);
 
-  // Configure PD6 as output(Exp Header Pin 16)
+  // Configure output: PD6 (Expansion Header Pin 16)
   GPIO_PinModeSet(gpioPortD, 6, gpioModePushPull, 0);
+
+  // Disable OVT for pins used as analog inputs. Disabling the over-voltage
+  // capability will provide less distortion on analog inputs.
+  // Analog pin inputs cannot exceed the minimum of IOVDD or AVDD + 0.3V,
+  // regardless of whether OVT is enabled or disabled.
+  GPIO->P[gpioPortC].OVTDIS |= 1 << 0;
 }
 
 /**************************************************************************//**

@@ -1,5 +1,4 @@
-
-================================================================================
+cryotimer_ulfrco_ret_em4exit
 
 This project shows how to use the Cryotimer in EM4 with the ULFRCO and GPIO
 retention where the retention is enabled upon entering EM4 and disabled upon 
@@ -99,12 +98,6 @@ PF4 - LED0
 PF5 - LED1
 PF6 - Push Button 0
 
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
-PF4 - LED0
-PF5 - LED1
-PF6 - Push Button 0
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A)
 Device: EFR32FG1P133F256GM48
 PF4 - LED0
@@ -136,7 +129,7 @@ PF5 - LED1
 PF6 - Push Button 0
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PF4 - LED0
 PF5 - LED1
 PF6 - Push Button 0

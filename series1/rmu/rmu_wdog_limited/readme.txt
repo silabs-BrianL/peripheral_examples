@@ -1,4 +1,4 @@
-RMU Limited Reset
+rmu_wdog_limited
 
 This project showcases the Limited Reset capability of series 1 starter kits.
 In the Limited Reset mode, after a soft reset, everything is reset with the
@@ -51,12 +51,6 @@ PA5 - Board Controller VCOM Enable
 
 Board:  Silicon Labs EFM32BG13P Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PA0 - USART0 TX
-PA1 - USART0 RX
-PA5 - Board Controller VCOM Enable
-
-Board:  Silicon Labs EFM32BG14P Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PA0 - USART0 TX
 PA1 - USART0 RX
 PA5 - Board Controller VCOM Enable

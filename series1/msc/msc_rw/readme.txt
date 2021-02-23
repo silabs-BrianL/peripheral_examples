@@ -1,9 +1,9 @@
 msc_rw
 
- This project demonstrates the use of the userdata page of the
- flash memory. The value 32 is stored in the 4th byte of the page. A
- variable is set to the value stored at this location, which can then
- be read in the debugger
+This project demonstrates the use of the userdata page of the
+flash memory. The value 32 is stored in the 4th word of the page. A
+variable is set to the value stored at this location, which can then
+be read in the debugger
 
 How To Test:
 1. Build the project and download to the Starter Kit
@@ -50,9 +50,6 @@ Device: EFR32BG12P332F1024GL125
 
 Board:  Silicon Labs EFR32BG13P Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-
-Board:  Silicon Labs EFR32BG14P Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 
 Board:  Silicon Labs EFR32FG1 Starter Kit (BRD4250A)
 Device: EFR32FG1P133F256GM48

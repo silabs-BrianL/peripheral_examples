@@ -1,5 +1,4 @@
-
-================================================================================
+timer_input_capture_polled
 
 This project demonstrates the use of the TIMER module for polled
 input capture. The Compare/Capture channel interrupt flag is polled until
@@ -76,10 +75,6 @@ Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
 PF6 - Push Button 0
 
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
-PF6 - Push Button 0
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A)
 Device: EFR32FG1P133F256GM48
 PF6 - Push Button 0
@@ -101,7 +96,7 @@ Device: EFR32MG1P232F256GM48
 PF6 - Push Button 0
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PF6 - Push Button 0
 
 Board:  Silicon Labs EFR32MG13P Starter Kit (BRD4159A)

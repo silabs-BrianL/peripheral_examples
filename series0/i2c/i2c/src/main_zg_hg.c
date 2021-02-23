@@ -1,19 +1,39 @@
-/**************************************************************************//**
+/***************************************************************************//**
  * @file main_zg_hg.c
  * @brief This project demonstrates both master and slave configurations of the
- * EFM32 I2C peripheral. Two EFM32 I2C modules are connected and set up
- * to both transmit (master mode) and receive (slave mode) between each
- * other using a common I2C bus.
- * @version 0.0.1
- ******************************************************************************
- * @section License
- * <b>Copyright 2018 Silicon Labs, Inc. http://www.silabs.com</b>
+ * EFM32 I2C peripheral. Two EFM32 I2C modules are connected and set up to both
+ * transmit (master mode) and receive (slave mode) between each other using a
+ * common I2C bus.
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
  
 #include <stdio.h>
@@ -66,7 +86,7 @@ void initGPIO(void)
 
   // Configure LED0 and LED1 as output
   GPIO_PinModeSet(BSP_GPIO_LED0_PORT, BSP_GPIO_LED0_PIN, gpioModePushPull, 0);
-  GPIO_PinModeSet(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PORT, gpioModePushPull, 0);
+  GPIO_PinModeSet(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN, gpioModePushPull, 0);
 
   NVIC_ClearPendingIRQ(GPIO_EVEN_IRQn);
   NVIC_EnableIRQ(GPIO_EVEN_IRQn);
@@ -79,7 +99,7 @@ void initGPIO(void)
  *****************************************************************************/
 void enableI2cSlaveInterrupts(void)
 {
-  I2C_IntClear(I2C0, I2C_IEN_ADDR | I2C_IEN_RXDATAV | I2C_IEN_SSTOP);
+  I2C_IntClear(I2C0, I2C_IFC_ADDR | I2C_IF_RXDATAV | I2C_IFC_SSTOP);
   I2C_IntEnable(I2C0, I2C_IEN_ADDR | I2C_IEN_RXDATAV | I2C_IEN_SSTOP);
   NVIC_EnableIRQ(I2C0_IRQn);
 }
@@ -91,7 +111,7 @@ void disableI2cInterrupts(void)
 {
   NVIC_DisableIRQ(I2C0_IRQn);
   I2C_IntDisable(I2C0, I2C_IEN_ADDR | I2C_IEN_RXDATAV | I2C_IEN_SSTOP);
-  I2C_IntClear(I2C0, I2C_IEN_ADDR | I2C_IEN_RXDATAV | I2C_IEN_SSTOP);
+  I2C_IntClear(I2C0, I2C_IFC_ADDR | I2C_IF_RXDATAV | I2C_IFC_SSTOP);
 }
 
 /**************************************************************************//**
@@ -184,10 +204,11 @@ void I2C0_IRQHandler(void)
   {
     // Address Match
     // Indicating that reception is started
-    i2c_rxInProgress = true;
-    I2C0->RXDATA;
+	i2c_rxInProgress = true;
+	I2C0->RXDATA;
+	i2c_rxBufferIndex = 0;
 
-    I2C_IntClear(I2C0, I2C_IFC_ADDR);
+	I2C_IntClear(I2C0, I2C_IFC_ADDR);
 
   } else if (status & I2C_IF_RXDATAV)
   {
@@ -198,7 +219,7 @@ void I2C0_IRQHandler(void)
 
   if(status & I2C_IEN_SSTOP){
     // Stop received, reception is ended
-    I2C_IntClear(I2C0, I2C_IEN_SSTOP);
+    I2C_IntClear(I2C0, I2C_IFC_SSTOP);
     i2c_rxInProgress = false;
     i2c_rxBufferIndex = 0;
   }

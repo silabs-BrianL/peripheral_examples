@@ -1,4 +1,5 @@
 async_polled
+
 This example echoes back lines sent to it over the virtual
 com port by the user using a baudrate of 115200. Once a
 new line or 80 characters are received, the RxBuffer is
@@ -30,12 +31,6 @@ PA1 - USART0 RX
 Board: Silicon Labs EFR32BG13 Starter Kit (BRD4104A) + 
         Wireless Starter Kit Mainboard
 Device: EFR32BG13P632F512GM48
-PA0 - USART0 TX
-PA1 - USART0 RX
-
-Board: Silicon Labs EFR32BG14 Starter Kit (BRD4105A) + 
-        Wireless Starter Kit Mainboard
-Device: EFR32BG14P732F256GM48
 PA0 - USART0 TX
 PA1 - USART0 RX
 

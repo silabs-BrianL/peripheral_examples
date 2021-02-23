@@ -1,3 +1,5 @@
+usart_spi_master_polled
+
 This project demonstrates polled operation of the USART in synchronous
 master mode.  USART0 is configured for SPI-compatible operation at
 1 Mbps.  Compatibility with the Synchronous Peripheral Interface standard
@@ -13,8 +15,8 @@ save each byte that is simultaneously received.  USART_SpiTransfer()
 polls the buffer level flag (USART_STATUS_TXBL), and, if space is
 available, writes a byte to the transmit data register to be sent.  It
 then polls the transmit complete flag (USART_STATUS_TXC) to determine
-when all bits of this byte have been, which, in turn, denotes that all
-bits of the incoming byte have been received.
+when all bits of this byte have been transmitted, which, in turn, denotes
+that all bits of the incoming byte have been received.
 
 After BUFLEN characters have been transmitted and received, the chip
 select is de-asserted (driven high), and the process repeats.  A
@@ -77,5 +79,15 @@ Device: EFR32MG21A010F1024IM32
 
 PA6 - USART0_TX (MOSI)  - Expansion Header pin 14
 PA5 - USART0_RX (MISO)  - Expansion Header pin 12
-PA3 - USART0_CLK (SCLK) - Expansion Header pin 10
-PA1 - USART0_CS (SSn)   - Expansion Header pin 6
+PC3 - USART0_CLK (SCLK) - Expansion Header pin 10
+PC1 - USART0_CS (SSn)   - Expansion Header pin 6
+
+Board: Silicon Labs EFR32xG22 2.4 GHz 10 dBm Board (BRD4182A) 
+       + Wireless Starter Kit Mainboard (BRD4001A)
+
+Device: EFR32MG22C224F512IM40
+
+PA6 - USART0_TX (MOSI)  - Expansion Header pin 14
+PA5 - USART0_RX (MISO)  - Expansion Header pin 12
+PC3 - USART0_CLK (SCLK) - Expansion Header pin 10
+PC1 - USART0_CS (SSn)   - Expansion Header pin 6

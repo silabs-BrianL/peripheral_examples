@@ -1,6 +1,4 @@
-RMU Reset Sources
-
-This readme applies for main_CRYO which is used with Pearl Gecko, Blue Gecko, Flex Gecko, and Mighty Gecko kits.
+rmu_get_reset_cause
 
 This project demonstrates four different reset sources - POR, EM4, Pin Reset 
 and System Reset Request. GPIO Push Buttons (PB0 & PB1) and LEDs (LED0 & LED1) 
@@ -49,13 +47,6 @@ PF7 - Push Button PB1
 
 Board: Silicon Labs EFM32BG13P Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PF4 - LED0
-PF5 - LED1
-PF6 - Push Button PB0
-PF7 - Push Button PB1
-
-Board: Silicon Labs EFM32BG14P Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PF4 - LED0
 PF5 - LED1
 PF6 - Push Button PB0

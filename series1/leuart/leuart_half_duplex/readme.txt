@@ -1,5 +1,4 @@
-
-================================================================================
+leuart_half_duplex
 
 This example uses the LEUART0 module (low energy UART) to do half-duplex
 communication with the LEUART0 module on another board using the single data-link
@@ -191,10 +190,6 @@ PA0 - LEUART0 TX (top middle row of breakout pads, Pin 33)
 
 Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PA0 - LEUART0 TX (Pin 12)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PA0 - LEUART0 TX (Pin 12)
 
 Board:  Silicon Labs EFM32TG11 Starter Kit (SLSTK3301A)

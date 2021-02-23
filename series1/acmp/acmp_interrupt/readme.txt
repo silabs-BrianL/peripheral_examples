@@ -1,8 +1,11 @@
-ACMP_Interrupt
+acmp_interrupt
 
 This project demonstrates a simple comparison of 2 inputs. An external input
 pin is compared with internal Vref of 1.25V. The program interrupts when the
 voltage on that pin drops below 1.25V, and toggles LED0.
+
+Note: Analog pin inputs cannot exceed the minimum of IOVDD or AVDD + 0.3V,
+regardless of whether OVT is enabled or disabled.
 
 How To Test:
 1. Build the project and download to the Starter Kit
@@ -64,11 +67,6 @@ Board:  Silicon Labs EFR32BG13 Radio Board (SLWRB4104A) +
 Device: EFR32BG13P632F512GM48
 ACMP0 input Ch 0 - Push Button 0 (PF6)
 
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A) + 
-        Wireless Starter Kit Mainboard
-Device: EFR32BG14P732F256GM48
-ACMP0 input Ch 0 - Push Button 0 (PF6)
-
 Board:  Silicon Labs EFR32FG1P Starter Kit (BRD4250A) + 
         Wireless Starter Kit Mainboard
 Device: EFR32FG1P133F256GM48
@@ -96,7 +94,7 @@ ACMP0 input Ch 0 - Push Button 0 (PF6)
 
 Board:  Silicon Labs EFR32MG12 Radio Board (SLWRB4161A) + 
         Wireless Starter Kit Mainboard
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 ACMP0 input Ch 0 - Push Button 0 (PF6)
 
 Board:  Silicon Labs EFR32MG13 Radio Board (SLWRB4159A) + 

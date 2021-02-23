@@ -1,19 +1,39 @@
-/**************************************************************************//**
- * @main_series1.c
+/***************************************************************************//**
+ * @file main.c
  * @brief This project demonstrates pulse width modulation using the TIMER
  * module. The GPIO pin specified in the readme.txt is configured for output and
  * outputs a 1kHz, 30% duty cycle signal. The duty cycle can be adjusted by
- * writing to the CCVB or changing the global dutyCyclePercent variable.
- * @version 0.0.1
- ******************************************************************************
- * @section License
- * <b>Copyright 2018 Silicon Labs, Inc. http://www.silabs.com</b>
+ * writing to the CCVB or changing the global dutyCycle variable.
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
 
 #include "em_device.h"
@@ -23,15 +43,12 @@
 #include "em_gpio.h"
 #include "em_timer.h"
 
-// Note: change this to set the desired output frequency in Hz
+// Global variables used to set top value and duty cycle of the timer
 #define PWM_FREQ          1000
 #define DUTY_CYCLE_STEPS  0.3
 
 static uint32_t topValue = 0;
 static volatile float dutyCycle = 0;
-
-// Note: change this to set the desired duty cycle (used to update CCVB value)
-// static volatile int dutyCyclePercent = 30;
 
 /**************************************************************************//**
  * @brief
@@ -39,7 +56,7 @@ static volatile float dutyCycle = 0;
  *
  * @note
  *    This handler doesn't actually dynamically change the duty cycle. Instead,
- *    it acts as a template for doing so. Simply change the dutyCyclePercent
+ *    it acts as a template for doing so. Simply change the dutyCycle
  *    global variable here to dynamically change the duty cycle.
  *****************************************************************************/
 void TIMER0_IRQHandler(void)
@@ -60,6 +77,17 @@ void initGpio(void)
 {
   // Configure PA6 as output
   GPIO_PinModeSet(gpioPortA, 6, gpioModePushPull, 0);
+}
+
+/**************************************************************************//**
+ * @brief
+ *    CMU initialization
+ *****************************************************************************/
+void initCmu(void)
+{
+  // Enable clock to GPIO and TIMER0
+  CMU_ClockEnable(cmuClock_GPIO, true);
+  CMU_ClockEnable(cmuClock_TIMER0, true);
 }
 
 /**************************************************************************//**
@@ -120,6 +148,7 @@ int main(void)
   CHIP_Init();
 
   // Initializations
+  initCmu();
   initGpio();
   initTimer();
 

@@ -1,3 +1,4 @@
+timer_single_edge_output_compare
 
 This project demonstrates single output compare using the TIMER module.
 TIMER1 is initialized for output compare on Compare/Capture channel 0 which
@@ -93,7 +94,7 @@ Device: EFR32MG1P232F256GM48
 PC10 - TIM0_CC0 #15 (Expansion Header Pin 15)
 
 Board:  Silicon Labs EFR32MG12P Starter Kit (BRD4161A)
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 PC10 - TIM0_CC0 #15 (Expansion Header Pin 15)
 
 Board:  Silicon Labs EFR32MG13P Starter Kit (BRD4159A)

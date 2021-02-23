@@ -1,5 +1,4 @@
-
-================================================================================
+timer_input_capture_interrupt
 
 This project demonstrates the use of the TIMER module for interrupt
 based input capture. After button 0 is pressed, the PRS routes this signal
@@ -36,4 +35,9 @@ Board: Silicon Labs EFR32xG21 2.4 GHz 10 dBm Board (BRD4181A)
        + Wireless Starter Kit Mainboard (BRD4001A)
 Device: EFR32MG21A010F1024IM32
 PD2 - Push Button 0
+
+Board:  Silicon Labs EFR32xG22 Radio Board (BRD4182A) + 
+        Wireless Starter Kit Mainboard
+Device: EFR32MG22C224F512IM40
+PB00 - Push Button 0
 

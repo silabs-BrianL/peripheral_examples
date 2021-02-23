@@ -1,4 +1,4 @@
-LDMA_Ping_Pong
+ldma_ping_pong
 
 This example is based on the EFR32 Series 2 Reference Manual:
 Chapter: LDMA
@@ -32,3 +32,7 @@ LDMA      - Channel 0
 Board:  Silicon Labs EFR32xG21 2.4 GHz 10 dBm Radio Board (BRD4181A) + 
         Wireless Starter Kit Mainboard (BRD4001A)
 Device: EFM32MG21A010F1024IM32
+
+Board:  Silicon Labs EFR32xG22 Radio Board (BRD4182A) + 
+        Wireless Starter Kit Mainboard
+Device: EFR32MG22C224F512IM40

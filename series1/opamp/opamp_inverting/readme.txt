@@ -1,5 +1,4 @@
-
-================================================================================
+opamp_inverting
 
 This project operates in EM3 and configures an opamp as an inverting amplifier
 whose gain is given by the following equation:
@@ -121,12 +120,6 @@ Device: EFR32BG13P632F512GM48
 PB13 - OPA2_N   (Vin) (Negative Pad) (Breakout Pads Pin 22)
 PC6  - OPA2_P   (POS) (APORT1XCH6)   (Expansion Header Pin 4)
 PC7  - OPA2_OUT       (APORT1YCH7)   (Expansion Header Pin 6)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
-PA4 - OPA0_N   (Vin) (Negative Pad) (Breakout Pads Pin 14)
-PC6 - OPA0_P   (POS) (APORT1XCH6)   (Expansion Header Pin 4)
-PC7 - OPA0_OUT       (APORT1YCH7)   (Expansion Header Pin 6)
 
 Board:  Silicon Labs EFM32GG11 Starter Kit (SLSTK3701A)
 Device: EFM32GG11B820F2048GL192

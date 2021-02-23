@@ -1,5 +1,4 @@
-
-================================================================================
+idac_timer_dma_waveform
 
 This example shows how to use a timer and the DMA to output a sinewave using the
 IDAC. This project operates in EM1.
@@ -108,10 +107,6 @@ PD12 - IDAC0_OUT (pin 11 of expansion headers)
 
 Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PA2  - IDAC0_OUT (pin 3 of expansion headers)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PA2  - IDAC0_OUT (pin 3 of expansion headers)
 
 Board:  Silicon Labs EFM32GG11 Starter Kit (SLSTK3701A)

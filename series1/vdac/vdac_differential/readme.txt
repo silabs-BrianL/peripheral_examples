@@ -1,5 +1,4 @@
-
-================================================================================
+vdac_differential
 
 This project uses the VDAC in continuous mode with differential output to output
 a difference of 0.5V between two pins in EM3. The VDAC operates independently
@@ -98,11 +97,6 @@ PD12 - VDAC0_OUT1 (Pin 8 of breakout pads)
 
 Board:  Silicon Labs EFR32BG13 Starter Kit (BRD4104A)
 Device: EFR32BG13P632F512GM48
-PA3  - VDAC0_OUT0 (Pin 2 of breakout pads)
-PD14 - VDAC0_OUT1 (Pin 33 of breakout pads)
-
-Board:  Silicon Labs EFR32BG14 Starter Kit (BRD4105A)
-Device: EFR32BG14P732F256GM48
 PA3  - VDAC0_OUT0 (Pin 2 of breakout pads)
 PD14 - VDAC0_OUT1 (Pin 33 of breakout pads)
 

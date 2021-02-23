@@ -1,17 +1,37 @@
 /***************************************************************************//**
- * @file
- * @brief This example demonstrates the LDMA descriptor linked list.
- *        See readme.txt for details.
- * @version 0.0.1
+ * @file main.c
+ * @brief This example demonstrates the LDMA descriptor linked list. See
+ * readme.txt for details.
  *******************************************************************************
- * @section License
- * <b>(C) Copyright 2019 Silicon Labs, http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
- * "Silabs_License_Agreement.txt" for details. Before using this software for
- * any purpose, you must agree to the terms of that agreement.
+ * SPDX-License-Identifier: Zlib
  *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ *******************************************************************************
+ * # Evaluation Quality
+ * This code has been minimally tested to ensure that it builds and is suitable 
+ * as a demonstration for evaluation purposes only. This code will be maintained
+ * at the sole discretion of Silicon Labs.
  ******************************************************************************/
 
 #include "em_chip.h"
@@ -40,7 +60,7 @@ uint16_t dstBuffer[LIST_SIZE][BUFFER_SIZE];
  * @brief
  *   LDMA IRQ handler.
  ******************************************************************************/
-void LDMA_IRQHandler( void )
+void LDMA_IRQHandler(void)
 {
   uint32_t pending;
 
@@ -51,13 +71,13 @@ void LDMA_IRQHandler( void )
   LDMA_IntClear(pending);
 
   // Check for LDMA error
-  if ( pending & LDMA_IF_ERROR )
+  if (pending & LDMA_IF_ERROR)
   {
     // Loop here to enable the debugger to see what has happened
     while (1);
   }
 
-  // Request next transfer
+  // Request next transfer, this transfers the remaining two descriptor
   LDMA->SWREQ |= LDMA_CH_MASK;
 }
 
@@ -70,33 +90,34 @@ void initLdma(void)
   uint32_t i;
 
   // Fill buffers
-  for (i = 0; i < BUFFER_SIZE * 4; i++){
+  for (i = 0; i < BUFFER_SIZE * 4; i++)
+  {
     srcBuffer[i / BUFFER_SIZE][i % BUFFER_SIZE] = i;
     dstBuffer[i / BUFFER_SIZE][i % BUFFER_SIZE] = 0;
   }
 
   LDMA_Init_t init = LDMA_INIT_DEFAULT;
-  LDMA_Init( &init );
+  LDMA_Init(&init);
 
   // Use memory transfer configuration macro
   LDMA_TransferCfg_t periTransferTx = LDMA_TRANSFER_CFG_MEMORY();
 
   // LINK descriptor macros to form linked list
-  for(i = 0; i < LIST_SIZE - 1; i++)
+  for (i = 0; i < LIST_SIZE - 1; i++)
   {
     descLink[i] = (LDMA_Descriptor_t)
-        LDMA_DESCRIPTOR_LINKREL_M2M_HALF( &srcBuffer[i], &dstBuffer[i],
-                                         BUFFER_SIZE, 1 );
+        LDMA_DESCRIPTOR_LINKREL_M2M_HALF(&srcBuffer[i], &dstBuffer[i],
+                                         BUFFER_SIZE, 1);
   }
 
   // SINGLE descriptor macro for the last one
   descLink[LIST_SIZE - 1] = (LDMA_Descriptor_t)
-      LDMA_DESCRIPTOR_SINGLE_M2M_HALF( &srcBuffer[LIST_SIZE - 1],
-                                      &dstBuffer[LIST_SIZE - 1], BUFFER_SIZE );
+      LDMA_DESCRIPTOR_SINGLE_M2M_HALF(&srcBuffer[LIST_SIZE - 1],
+                                      &dstBuffer[LIST_SIZE - 1], BUFFER_SIZE);
 
   // Turn on Done interrupts for Descriptor 2
   descLink[1].xfer.doneIfs = true;
-  // Disable automatic triggers for Descriptor 3
+  // Disable automatic triggers for Descriptor 3, wait for software trigger
   descLink[2].xfer.structReq = false;
 
   LDMA_StartTransfer(LDMA_CHANNEL, (void*)&periTransferTx, (void*)&descLink[0]);

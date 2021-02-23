@@ -1,4 +1,4 @@
-LETIMER_One_Shot_Output_Compare
+letimer_one_shot_output_compare
 
 This project demonstrates output compare in EM2 using the LETIMER.
 The project initializes the timer in one-shot mode, and after one 
@@ -52,10 +52,6 @@ PF4 (LED0) - Input TIM0_CC0 #28
 
 Board:  Silicon Labs EFR32BG13 Radio Board (SLWRB4104A)
 Device: EFR32BG13P632F512GM48
-PF4 (LED0) - Input TIM0_CC0 #28
-
-Board:  Silicon Labs EFR32BG14 Radio Board (SLWRB4105A) 
-Device: EFR32BG14P732F256GM48
 PF4 (LED0) - Input TIM0_CC0 #28
 
 Board:  Silicon Labs EFM32FG1P Starter Kit (BRD4250A)

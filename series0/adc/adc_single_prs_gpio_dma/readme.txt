@@ -1,4 +1,4 @@
-ADC_Single_Prs_Gpio_Dma
+adc_single_prs_gpio_dma
 
 This project demonstrates ADC0 peripheral in EM2 to take single-ended 
 measurements.  These measurements are requested by gpio signals and routed 
@@ -131,7 +131,7 @@ Analog Input - PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 10)
 
 Board:  Silicon Labs EFR32MG12 Radio Board (SLWRB4161A) + 
         Wireless Starter Kit Mainboard
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 Request Input - PF6 - PRS Channel 0 (Push Button 0)
 Analog Input - PC9 - ADC0 Port 2X Channel 9 (Expansion Header Pin 13)
 

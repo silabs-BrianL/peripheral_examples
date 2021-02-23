@@ -1,4 +1,4 @@
-ACMP_Interrupt
+acmp_interrupt
 
 This project demonstrates a simple comparison of 2 inputs. An external input
 pin is compared with internal Vref of 1.25V. The program interrupts when the
@@ -96,7 +96,7 @@ ACMP0 input Ch 0 - Push Button 0 (PF6)
 
 Board:  Silicon Labs EFR32MG12 Radio Board (SLWRB4161A) + 
         Wireless Starter Kit Mainboard
-Device: EFR32MG1P432F1024GL125
+Device: EFR32MG12P432F1024GL125
 ACMP0 input Ch 0 - Push Button 0 (PF6)
 
 Board:  Silicon Labs EFR32MG13 Radio Board (SLWRB4159A) + 
